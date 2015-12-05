@@ -4,11 +4,14 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
 
   before(:each) do
     AccountRepo.instance.clear
+    GithubRepo.instance.clear
   end
 
   it { is_expected.to route("list").to(:list) }
   it { is_expected.to route('set githubname').to(:regist) }
   it { is_expected.to route('delete').to(:delete) }
+  it { is_expected.to route('hub githubname').to(:hub_regist) }
+  it { is_expected.to route('hub').to(:hub) }
   it { is_expected.to route('issues').to(:issues) }
 
   it "set" do
@@ -27,14 +30,26 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     expect(replies.last).to eq("list is empty")
   end
 
-
   it "delete" do
     send_message("set yutakakinjyo")
     send_message("delete")
     expect(replies.last).to eq("delete *yutakakinjyo* from list")
   end
 
+  it "set hub repo" do
+    send_message("hub yutakakinjyo/lita-teamwork")
+    expect(replies.last).to eq("set *yutakakinjyo/lita-teamwork* to repository")
+  end
+
+  it "hub name" do
+    send_message("hub yutakakinjyo/lita-teamwork")
+    send_message("hub")
+    expect(replies.last).to eq("yutakakinjyo/lita-teamwork")
+  end
+
+
   it "isseus", :skip => true do
+    send_message("hub yutakakinjyo/lita-teamwork")
     send_message("set yutakakinjyo")
     send_message("issues")
     expect(replies.last).to eq("*`issue for test`* _assignee_ *Test User*")

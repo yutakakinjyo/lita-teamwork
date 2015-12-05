@@ -5,11 +5,14 @@ module Lita
       route(/^list$/, :list)
       route(/^set\s+(.+)/, :regist)
       route(/^delete$/, :delete)
+      route(/^hub$/, :hub)
+      route(/^hub\s+(.+)$/, :hub_regist)
       route(/^issues$/, :issues)
 
       def initialize(robot)
         super(robot)
         @repo = AccountRepo.instance
+        @hub = GithubRepo.instance
       end
 
       def list(response)
@@ -30,10 +33,20 @@ module Lita
         response.reply("delete *#{login_name}* from list")
       end
 
+      def hub(response)
+        response.reply(@hub.name)
+      end
+
+
+      def hub_regist(response)
+        @hub.regist(response.match_data[1])
+        response.reply("set *#{response.match_data[1]}* to repository")
+      end
+
       def issues(response)
         client = HubClient.new
         account = Account.new
-        issues = client.list_issues("yutakakinjyo/lita-teamwork")
+        issues = client.list_issues(@hub.name)
         issues.each do |issue|
           response.reply "*`#{issue.title}`* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
         end
