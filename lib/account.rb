@@ -3,7 +3,7 @@ require 'account_repo'
 class Account
 
   def initialize
-    @repo = AccountRepo.new
+    @repo = AccountRepo.instance
   end
 
   def name(assignee)

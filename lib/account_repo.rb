@@ -1,4 +1,9 @@
+require 'singleton'
+
 class AccountRepo
+
+  include Singleton
+
   def initialize
     @accounts = {}
   end
