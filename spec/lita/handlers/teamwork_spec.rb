@@ -13,7 +13,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
 
   it "set" do
     send_message("set yutaka")
-    expect(replies.last).to eq("set *@#{user.name}* + is *yutaka* in _GitHub_")
+    expect(replies.last).to eq("set *@#{user.name}* is *yutaka* in _GitHub_")
   end
 
   it "list" do
