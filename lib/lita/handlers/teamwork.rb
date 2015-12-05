@@ -2,10 +2,10 @@ module Lita
   module Handlers
     class Teamwork < Handler
 
-      route(/list/, :list)
-      route(/regist\s+(.+)/, :regist)
-      route(/delete/, :delete)
-      route(/issues/, :issues)
+      route(/^list$/, :list)
+      route(/^regist\s+(.+)/, :regist)
+      route(/^delete$/, :delete)
+      route(/^issues$/, :issues)
 
       def initialize(robot)
         super(robot)
