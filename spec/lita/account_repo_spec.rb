@@ -5,6 +5,7 @@ describe AccountRepo do
 
   before(:each) do
     @repo = AccountRepo.instance
+    @repo.clear
   end
   
   it "regist account name" do

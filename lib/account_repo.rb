@@ -24,4 +24,9 @@ class AccountRepo
     @accounts.delete(name)
   end
 
+  def clear
+    @accounts = {}
+  end
+
+
 end
