@@ -6,7 +6,7 @@ describe HubClient do
     @client = HubClient.new
   end
 
-  it "list_issues", :skip => true do
+  it "list_issues" , :skip => true do
     issue = @client.list_issues("yutakakinjyo/lita-teamwork")[0]
     expect("issue for test").to eq(issue.title)
   end
