@@ -1,5 +1,3 @@
-require 'account_repo'
-
 class Account
 
   def initialize
@@ -19,3 +17,4 @@ class Account
   end
 
 end
+
