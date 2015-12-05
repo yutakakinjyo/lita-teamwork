@@ -6,11 +6,9 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     AccountRepo.instance.clear
   end
 
-  it { is_expected.to route("list") }
   it { is_expected.to route("list").to(:list) }
-
-  it { is_expected.to route('regist yutaka') }
   it { is_expected.to route('regist yutaka').to(:regist) }
+  it { is_expected.to route('delete').to(:delete) }
 
   it "regist" do
     send_message("regist yutaka")
@@ -22,6 +20,5 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     send_message("list")
     expect(replies.last).to eq(user.name + " is yutakakinjyo in GitHub")
   end
-
 
 end

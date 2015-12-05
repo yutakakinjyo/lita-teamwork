@@ -4,6 +4,7 @@ module Lita
 
       route(/list/, :list)
       route(/regist\s+(.+)/, :regist)
+      route(/delete/, :delete)
 
       def list(response)
         @repo = AccountRepo.instance
@@ -16,6 +17,9 @@ module Lita
         @repo = AccountRepo.instance
         @repo.regist(login: response.match_data[1], slack_name: response.user.name)
         response.reply("register \"" + response.user.name + "\" to " + response.match_data[1])
+      end
+
+      def delete(response)
       end
 
       Lita.register_handler(self)
