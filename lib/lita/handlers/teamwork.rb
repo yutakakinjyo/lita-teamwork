@@ -18,7 +18,6 @@ module Lita
         response.reply("register \"" + response.user.name + "\" to " + response.match_data[1])
       end
 
-
       Lita.register_handler(self)
     end
   end

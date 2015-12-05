@@ -1,5 +1,4 @@
 require "spec_helper"
-require 'account_repo'
 
 describe AccountRepo do
 
