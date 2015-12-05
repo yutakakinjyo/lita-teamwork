@@ -21,4 +21,10 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     expect(replies.last).to eq(user.name + " is yutakakinjyo in GitHub")
   end
 
+  it "delete" do
+    send_message("regist yutakakinjyo")
+    send_message("delete")
+    expect(replies.last).to eq("delete yutakakinjyo from account map list")
+  end
+
 end

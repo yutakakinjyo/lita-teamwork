@@ -20,6 +20,7 @@ module Lita
       end
 
       def delete(response)
+        
       end
 
       Lita.register_handler(self)
