@@ -9,6 +9,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it { is_expected.to route("list").to(:list) }
   it { is_expected.to route('regist yutaka').to(:regist) }
   it { is_expected.to route('delete').to(:delete) }
+  it { is_expected.to route('issues').to(:issues) }
 
   it "regist" do
     send_message("regist yutaka")
@@ -26,5 +27,12 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     send_message("delete")
     expect(replies.last).to eq("delete yutakakinjyo from account map list")
   end
+
+  it "isseus", :skip => true do
+    send_message("regist yutakakinjyo")
+    send_message("issues")
+    expect(replies.last).to eq("issue for test assignee Test User")
+  end
+
 
 end
