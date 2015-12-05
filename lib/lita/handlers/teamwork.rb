@@ -21,7 +21,7 @@ module Lita
 
       def regist(response)
         @repo.regist(login: response.match_data[1], slack_name: response.user.name)
-        response.reply("set *@#{response.user.name}* is *#{response.match_data[1]}* in _GitHub_")
+        response.reply("set *#{response.user.name}* is *#{response.match_data[1]}* in _GitHub_")
       end
 
       def delete(response)
@@ -35,7 +35,7 @@ module Lita
         account = Account.new
         issues = client.list_issues("yutakakinjyo/lita-teamwork")
         issues.each do |issue|
-          response.reply "*\"#{issue.title}\"* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
+          response.reply "*`#{issue.title}`* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
         end
       end
 

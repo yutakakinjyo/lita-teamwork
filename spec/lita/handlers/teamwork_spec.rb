@@ -13,7 +13,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
 
   it "set" do
     send_message("set yutaka")
-    expect(replies.last).to eq("set *@#{user.name}* is *yutaka* in _GitHub_")
+    expect(replies.last).to eq("set *#{user.name}* is *yutaka* in _GitHub_")
   end
 
   it "list" do
@@ -37,7 +37,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it "isseus", :skip => true do
     send_message("set yutakakinjyo")
     send_message("issues")
-    expect(replies.last).to eq("*\"issue for test\"* _assignee_ *Test User*")
+    expect(replies.last).to eq("*`issue for test`* _assignee_ *Test User*")
   end
 
 
