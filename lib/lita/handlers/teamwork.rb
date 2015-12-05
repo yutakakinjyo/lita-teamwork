@@ -13,8 +13,9 @@ module Lita
       end
 
       def list(response)
+        response.reply("list is empty") if @repo.list.empty?
         @repo.list.each do |key,value|
-          response.reply("*@#{value}* is *#{key}* in _GitHub_")
+          response.reply("*#{value}* is *#{key}* in _GitHub_")
         end
       end
 

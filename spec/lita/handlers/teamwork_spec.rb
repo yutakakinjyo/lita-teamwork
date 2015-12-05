@@ -19,8 +19,14 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it "list" do
     send_message("set yutakakinjyo")
     send_message("list")
-    expect(replies.last).to eq("*@Test User* is *yutakakinjyo* in _GitHub_")
+    expect(replies.last).to eq("*Test User* is *yutakakinjyo* in _GitHub_")
   end
+
+  it "list is empty" do
+    send_message("list")
+    expect(replies.last).to eq("list is empty")
+  end
+
 
   it "delete" do
     send_message("set yutakakinjyo")
