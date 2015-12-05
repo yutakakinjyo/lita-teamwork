@@ -9,7 +9,11 @@ class AccountRepo
   end
 
   def find_by(name)
-    @accounts[name]
+    @accounts[name] ? @accounts[name] : @accounts.invert[name]
+  end
+
+  def find_invert_by(name)
+    @accounts.invert[name]
   end
 
   def regist(login:, slack_name:)
@@ -25,7 +29,7 @@ class AccountRepo
   end
 
   def clear
-    @accounts = {}
+    @accounts.clear
   end
 
 end
