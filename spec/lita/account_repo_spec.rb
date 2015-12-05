@@ -4,7 +4,7 @@ require 'account_repo'
 describe AccountRepo do
 
   before(:each) do
-    @repo = AccountRepo.new
+    @repo = AccountRepo.instance
   end
   
   it "regist account name" do
@@ -26,6 +26,8 @@ describe AccountRepo do
     @repo.delete('yutakakinjyo')
     expect(1).to eq(@repo.list.count)
   end
+
+  
 
 
 end        
