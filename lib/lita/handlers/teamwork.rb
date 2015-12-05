@@ -3,7 +3,7 @@ module Lita
     class Teamwork < Handler
 
       route(/^list$/, :list)
-      route(/^regist\s+(.+)/, :regist)
+      route(/^set\s+(.+)/, :regist)
       route(/^delete$/, :delete)
       route(/^issues$/, :issues)
 
@@ -14,19 +14,19 @@ module Lita
 
       def list(response)
         @repo.list.each do |key,value|
-          response.reply(value + " is " + key + " in GitHub")
+          response.reply("*@#{value}* is *#{key}* in _GitHub_")
         end
       end
 
       def regist(response)
         @repo.regist(login: response.match_data[1], slack_name: response.user.name)
-        response.reply("register \"" + response.user.name + "\" to " + response.match_data[1])
+        response.reply("set *@#{response.user.name}* is *#{response.match_data[1]}* in _GitHub_")
       end
 
       def delete(response)
         login_name = @repo.find_by(response.user.name)
         @repo.delete(login_name)
-        response.reply("delete " + login_name + " from account map list")
+        response.reply("delete *#{login_name}* from list")
       end
 
       def issues(response)
@@ -34,7 +34,7 @@ module Lita
         account = Account.new
         issues = client.list_issues("yutakakinjyo/lita-teamwork")
         issues.each do |issue|
-          response.reply issue.title + " assignee " + account.name(issue.assignee) if issue.assignee
+          response.reply "*\"#{issue.title}\"* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
         end
       end
 
