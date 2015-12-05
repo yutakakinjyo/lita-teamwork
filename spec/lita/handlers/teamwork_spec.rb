@@ -19,7 +19,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it "list" do
     send_message("regist yutakakinjyo")
     send_message("list")
-    expect(replies.last).to eq(user.name + " is yutakakinjyo in GitHub")
+    expect(replies.last).to eq("*@Test User* is *yutakakinjyo* in _GitHub_")
   end
 
   it "delete" do

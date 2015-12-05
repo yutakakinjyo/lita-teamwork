@@ -14,7 +14,7 @@ module Lita
 
       def list(response)
         @repo.list.each do |key,value|
-          response.reply(value + " is " + key + " in GitHub")
+          response.reply("*@#{value}* is *#{key}* in _GitHub_")
         end
       end
 
