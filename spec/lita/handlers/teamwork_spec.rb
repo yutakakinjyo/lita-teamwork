@@ -13,7 +13,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it { is_expected.to route('hub githubname').to(:hub_regist) }
   it { is_expected.to route('hub').to(:hub) }
   it { is_expected.to route('issues').to(:issues) }
-  it { is_expected.to route('working').to(:working) }
+  it { is_expected.to route('issues working').to(:working) }
 
   it "map" do
     send_message("map yutaka")
@@ -59,7 +59,7 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
   it "working", :skip => true do
     send_message("hub yutakakinjyo/lita-teamwork")
     send_message("map yutakakinjyo")
-    send_message("working")
+    send_message("issues working")
     expect(replies.last).to eq("*`issue for test`* working _assignee_ *Test User*")
   end
 

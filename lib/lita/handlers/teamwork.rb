@@ -8,7 +8,7 @@ module Lita
       route(/^hub$/, :hub)
       route(/^hub\s+(.+)$/, :hub_regist)
       route(/^issues$/, :issues)
-      route(/^working$/, :working)
+      route(/^issues\s+(.+)$/, :working)
 
       def initialize(robot)
         super(robot)
@@ -56,11 +56,11 @@ module Lita
       def working(response)
         client = HubClient.new
         account = Account.new
-        issues = client.list_issues(@hub_repo.name)
+        label = response.match_data[1]
+        assignee = response.match_data[2]
+        issues = client.list_issues(@hub_repo.name, {labels: label, assignee: assignee})
         issues.each do |issue|
-          unless issue.labels.empty?
-            response.reply "*`#{issue.title}`* working _assignee_ *#{account.name(issue.assignee)}*" unless issue.labels.select { |label| label.name == "Working" }.empty?
-          end
+          response.reply "*`#{issue.title}`* working _assignee_ *#{account.name(issue.assignee)}*"
         end
       end
 
