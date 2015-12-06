@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-teamwork"
-  spec.version       = "0.3.1"
+  spec.version       = "0.4.1"
   spec.authors       = ["yutakakinjyo"]
   spec.email         = ["yutakakinjyo@gmail.com"]
   spec.description   = "for teamwork on chat. alpha version"
