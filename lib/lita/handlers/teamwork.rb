@@ -12,7 +12,7 @@ module Lita
       def initialize(robot)
         super(robot)
         @ac_repo = AccountRepo.instance
-        @hub = GithubRepo.instance
+        @hub_repo = GithubRepo.instance
       end
 
       def map(response)
@@ -34,19 +34,19 @@ module Lita
       end
 
       def hub(response)
-        response.reply(@hub.name)
+        response.reply(@hub_repo.name)
       end
 
 
       def hub_regist(response)
-        @hub.regist(response.match_data[1])
+        @hub_repo.regist(response.match_data[1])
         response.reply("set *#{response.match_data[1]}* to repository")
       end
 
       def issues(response)
         client = HubClient.new
         account = Account.new
-        issues = client.list_issues(@hub.name)
+        issues = client.list_issues(@hub_repo.name)
         issues.each do |issue|
           response.reply "*`#{issue.title}`* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
         end
