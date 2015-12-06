@@ -2,8 +2,8 @@ module Lita
   module Handlers
     class Teamwork < Handler
 
-      route(/^list$/, :list)
-      route(/^set\s+(.+)/, :regist)
+      route(/^map$/, :map)
+      route(/^map\s+(.+)/, :map_regist)
       route(/^delete$/, :delete)
       route(/^hub$/, :hub)
       route(/^hub\s+(.+)$/, :hub_regist)
@@ -15,14 +15,14 @@ module Lita
         @hub = GithubRepo.instance
       end
 
-      def list(response)
-        response.reply("list is empty") if @repo.list.empty?
+      def map(response)
+        response.reply("map is empty") if @repo.list.empty?
         @repo.list.each do |key,value|
           response.reply("*#{value}* is *#{key}* in _GitHub_")
         end
       end
 
-      def regist(response)
+      def map_regist(response)
         @repo.regist(login: response.match_data[1], slack_name: response.user.name)
         response.reply("set *#{response.user.name}* is *#{response.match_data[1]}* in _GitHub_")
       end
@@ -30,7 +30,7 @@ module Lita
       def delete(response)
         login_name = @repo.find_by(response.user.name)
         @repo.delete(login_name)
-        response.reply("delete *#{login_name}* from list")
+        response.reply("delete *#{login_name}* from map")
       end
 
       def hub(response)

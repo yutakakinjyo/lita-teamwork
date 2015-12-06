@@ -7,33 +7,33 @@ describe Lita::Handlers::Teamwork, lita_handler: true do
     GithubRepo.instance.clear
   end
 
-  it { is_expected.to route("list").to(:list) }
-  it { is_expected.to route('set githubname').to(:regist) }
+  it { is_expected.to route("map").to(:map) }
+  it { is_expected.to route('map githubname').to(:map_regist) }
   it { is_expected.to route('delete').to(:delete) }
   it { is_expected.to route('hub githubname').to(:hub_regist) }
   it { is_expected.to route('hub').to(:hub) }
   it { is_expected.to route('issues').to(:issues) }
 
-  it "set" do
-    send_message("set yutaka")
+  it "map" do
+    send_message("map yutaka")
     expect(replies.last).to eq("set *#{user.name}* is *yutaka* in _GitHub_")
   end
 
-  it "list" do
-    send_message("set yutakakinjyo")
-    send_message("list")
+  it "map" do
+    send_message("map yutakakinjyo")
+    send_message("map")
     expect(replies.last).to eq("*Test User* is *yutakakinjyo* in _GitHub_")
   end
 
-  it "list is empty" do
-    send_message("list")
-    expect(replies.last).to eq("list is empty")
+  it "map is empty" do
+    send_message("map")
+    expect(replies.last).to eq("map is empty")
   end
 
   it "delete" do
-    send_message("set yutakakinjyo")
+    send_message("map yutakakinjyo")
     send_message("delete")
-    expect(replies.last).to eq("delete *yutakakinjyo* from list")
+    expect(replies.last).to eq("delete *yutakakinjyo* from map")
   end
 
   it "set hub repo" do
