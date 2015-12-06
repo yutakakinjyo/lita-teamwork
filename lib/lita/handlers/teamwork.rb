@@ -8,6 +8,7 @@ module Lita
       route(/^hub$/, :hub)
       route(/^hub\s+(.+)$/, :hub_regist)
       route(/^issues$/, :issues)
+      route(/^working$/, :working)
 
       def initialize(robot)
         super(robot)
@@ -49,6 +50,17 @@ module Lita
         issues = client.list_issues(@hub_repo.name)
         issues.each do |issue|
           response.reply "*`#{issue.title}`* _assignee_ *#{account.name(issue.assignee)}*" if issue.assignee
+        end
+      end
+
+      def working(response)
+        client = HubClient.new
+        account = Account.new
+        issues = client.list_issues(@hub_repo.name)
+        issues.each do |issue|
+          unless issue.labels.empty?
+            response.reply "*`#{issue.title}`* working _assignee_ *#{account.name(issue.assignee)}*" unless issue.labels.select { |label| label.name == "Working" }.empty?
+          end
         end
       end
 
