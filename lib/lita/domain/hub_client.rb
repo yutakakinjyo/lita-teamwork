@@ -9,8 +9,8 @@ class HubClient
     Octokit.auto_paginate = true
   end
 
-  def list_issues(repo)
-    @client.list_issues(repo)
+  def list_issues(repo, option={})
+    @client.list_issues(repo, option)
   end
 
 end
