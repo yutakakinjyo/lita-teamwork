@@ -1,7 +1,7 @@
 class Account
 
   def initialize
-    @repo = AccountRepo.instance
+    @ac_repo = AccountRepo.instance
   end
 
   def name(assignee)
@@ -12,7 +12,7 @@ class Account
   private
 
   def account_mapping(login)
-    account = @repo.find_by(login)
+    account = @ac_repo.find_by(login)
     account ? account : login
   end
 

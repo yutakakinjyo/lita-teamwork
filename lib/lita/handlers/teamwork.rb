@@ -11,25 +11,25 @@ module Lita
 
       def initialize(robot)
         super(robot)
-        @repo = AccountRepo.instance
+        @ac_repo = AccountRepo.instance
         @hub = GithubRepo.instance
       end
 
       def map(response)
-        response.reply("map is empty") if @repo.list.empty?
-        @repo.list.each do |key,value|
+        response.reply("map is empty") if @ac_repo.list.empty?
+        @ac_repo.list.each do |key,value|
           response.reply("*#{value}* is *#{key}* in _GitHub_")
         end
       end
 
       def map_regist(response)
-        @repo.regist(login: response.match_data[1], slack_name: response.user.name)
+        @ac_repo.regist(login: response.match_data[1], slack_name: response.user.name)
         response.reply("set *#{response.user.name}* is *#{response.match_data[1]}* in _GitHub_")
       end
 
       def delete(response)
-        login_name = @repo.find_by(response.user.name)
-        @repo.delete(login_name)
+        login_name = @ac_repo.find_by(response.user.name)
+        @ac_repo.delete(login_name)
         response.reply("delete *#{login_name}* from map")
       end
 
